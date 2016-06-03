@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/card_view_padding"
+            android:orientation="vertical">
+            <!-- qcm label -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_view_padding"
+                android:minHeight="100dp"
+                android:padding="@dimen/card_view_padding"
+                app:cardElevation="10dp">
+
+                <TextView
+                    android:id="@+id/label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/card_view_padding"
+                    android:gravity="center"
+                    android:padding="@dimen/card_view_padding"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </android.support.v7.widget.CardView>
+
+            <!-- choices label -->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/card_view_padding"
+                android:padding="@dimen/card_view_padding"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:id="@+id/response_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/card_view_padding"
+                    android:gravity="left"
+                    android:orientation="vertical"
+                    android:padding="@dimen/card_view_padding"></LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_view_response"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="2.5dp">
+
+                <TextView
+                    android:id="@+id/button_view_response"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="view response"
+                    android:textColor="@drawable/btn_primary_text_color"
+                    android:textSize="18sp" />
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</FrameLayout>

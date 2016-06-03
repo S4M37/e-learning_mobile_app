@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">E-learning</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (required)</string>
+    <string name="action_sign_in">Se Connecter</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="navigation_drawer_open" />
+    <string name="navigation_drawer_close" />
+    <string name="loading">loading ...</string>
+    <string name="server_error">Service not found, try later</string>
+    <string name="title_server_error">Oups!</string>
+    <string name="empty_field">Veuillez completez les champs vides</string>
+    <string name="invalid_credential">Veuillez verifiez vos informations</string>
+    <string name="email_confirmation">U\'ll recieve a confirmation Email, plz activate ur account</string>
+    <string name="inactive_account">Votre compte est inactive!</string>
+    <string name="invalid_user">U are not a member</string>
+    <string name="gellerie">galerie</string>
+    <string name="camera">camera</string>
+    <string name="registration_request">u must have a private space to pass exams? sign up plz ;)</string>
+    <string name="number_picker_title">Choose a periode for ur test</string>
+    <string name="logout">sign out</string>
+    <string name="login">sign in</string>
+    <string name="exam_time_out">exam is ended!</string>
+    <string name="training_time_out">nice try, but time is out, wanna review responses ?</string>
+    <string name="label_example">Quo cognito Constantius ultra <morta></morta>lem modum exarsit ac nequo casu idem Gallus de futuris incertus agitare quaedam conducentia saluti suae per itinera conaretur, remoti sunt omnes de industria milites agentes in civitatibus perviis.</string>
+    <string name="choice_example">Sed cautela nimia in peiores haeserat.</string>
+    <string name="exam_backpressed_title">Hey!</string>
+    <string name="exam_backpressed_message">Are u sure u wanna cancel ur exam ?</string>
+    <string name="exam_request_title">Hey!</string>
+    <string name="exam_request_message">u\'ll start this exam, its duration is </string>
+</resources>
