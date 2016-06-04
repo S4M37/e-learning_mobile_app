@@ -22,7 +22,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import tn.ppp.gl3.e_learning.Adapter.CategoryRecyclerViewAdapter;
+import tn.ppp.gl3.e_learning.Adapter.SimpleRecyclerViewAdapter;
 import tn.ppp.gl3.e_learning.Model.Category;
 import tn.ppp.gl3.e_learning.R;
 import tn.ppp.gl3.e_learning.Service.DialogFactory;
@@ -43,7 +43,7 @@ public class CategoryFragment extends Fragment {
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_category, container, false);
+        rootView = inflater.inflate(R.layout.fragment_simple_list, container, false);
         retrofitServices = Utils.getRetrofitServices();
         inisiliazeView();
         getCategories();
@@ -65,7 +65,7 @@ public class CategoryFragment extends Fragment {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             categories[i] = gson.fromJson(String.valueOf(jsonArray.get(i)), Category.class);
                         }
-                        CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(getContext(), categories);
+                        SimpleRecyclerViewAdapter categoryRecyclerViewAdapter = new SimpleRecyclerViewAdapter(getContext(), categories);
                         listCategries.setAdapter(categoryRecyclerViewAdapter);
                     } catch (JSONException | IOException | NullPointerException e) {
                         e.printStackTrace();

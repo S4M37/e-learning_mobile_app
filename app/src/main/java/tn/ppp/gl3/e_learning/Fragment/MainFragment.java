@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
         courcesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((MainActivity) getActivity()).showFragment(new CoursesFragment());
             }
         });
         trainingButton.setOnClickListener(new View.OnClickListener() {

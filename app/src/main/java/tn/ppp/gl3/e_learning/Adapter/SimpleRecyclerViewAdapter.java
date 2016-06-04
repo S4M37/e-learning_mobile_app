@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -24,32 +26,42 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import tn.ppp.gl3.e_learning.Activity.ExamActivity;
 import tn.ppp.gl3.e_learning.Model.Category;
+import tn.ppp.gl3.e_learning.Model.Course;
 import tn.ppp.gl3.e_learning.Model.Exam;
 import tn.ppp.gl3.e_learning.Model.Item;
 import tn.ppp.gl3.e_learning.R;
 import tn.ppp.gl3.e_learning.Service.DialogFactory;
+import tn.ppp.gl3.e_learning.Service.DownloadPdfFile;
 import tn.ppp.gl3.e_learning.Utils.Utils;
 import tn.ppp.gl3.e_learning.Widget.CircleImageView;
 
 /**
  * Created by S4M37 on 02/06/2016.
  */
-public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder> {
+public class SimpleRecyclerViewAdapter extends RecyclerView.Adapter<SimpleRecyclerViewAdapter.ViewHolder> {
+    private Course[] courses;
     private Exam[] exams;
     private Category[] categories;
     private Context context;
     private ProgressDialog progressDialog;
 
-    public CategoryRecyclerViewAdapter(Context context, Category[] categories) {
+    public SimpleRecyclerViewAdapter(Context context, Category[] categories) {
         this.context = context;
         this.categories = categories;
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(context.getString(R.string.loading));
     }
 
-    public CategoryRecyclerViewAdapter(Context context, Exam[] exams) {
+    public SimpleRecyclerViewAdapter(Context context, Exam[] exams) {
         this.context = context;
         this.exams = exams;
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage(context.getString(R.string.loading));
+    }
+
+    public SimpleRecyclerViewAdapter(Context context, Course[] courses) {
+        this.context = context;
+        this.courses = courses;
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(context.getString(R.string.loading));
     }
@@ -101,7 +113,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
                     });
                 }
             });
-        } else {
+        } else if (exams != null) {
             final Exam exam = exams[position];
             holder.label.setText(exam.getLabel());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +139,37 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
                     builder.show();
                 }
             });
+        } else {
+            final Course course = courses[position];
+            Log.d("course", course.getLabel());
+            holder.label.setText(course.getLabel());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Call<ResponseBody> call = Utils.getRetrofitServices().downloadCourse(course.getId_cource());
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.code() == 200) {
+                                String fileName = course.getLabel();
+                                InputStream in = response.body().byteStream();
+                                new DownloadPdfFile(in, context).execute(fileName);
+                            } else {
+                                try {
+                                    Log.d("codeResponse", response.code() + "" + response.errorBody().string() + course.getId_cource());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
+                }
+            });
         }
     }
 
@@ -134,8 +177,10 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     public int getItemCount() {
         if (categories != null) {
             return categories.length;
-        } else {
+        } else if (exams != null) {
             return exams.length;
+        } else {
+            return courses.length;
         }
     }
 

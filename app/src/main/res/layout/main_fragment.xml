@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/btn_primary_bg"
-                android:text="curses"
+                android:text="courses"
                 android:textColor="@drawable/btn_primary_text_color" />
         </LinearLayout>
 

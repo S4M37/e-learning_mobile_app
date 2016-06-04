@@ -7,6 +7,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Streaming;
 
 /**
  * Created by S4M37 on 17/04/2016.
@@ -38,6 +39,13 @@ public interface RetrofitServices {
 
     @GET("user/{id_User}/results")
     Call<ResponseBody> getResultsForUser(@Path("id_User") int id_user);
+
+    @GET("courses/{id_Course}/download")
+    @Streaming
+    Call<ResponseBody> downloadCourse(@Path("id_Course") int id_course);
+
+    @GET("courses")
+    Call<ResponseBody> getCourses();
 }
 
 

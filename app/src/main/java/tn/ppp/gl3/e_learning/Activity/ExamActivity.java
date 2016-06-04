@@ -12,7 +12,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -164,9 +163,9 @@ public class ExamActivity extends AppCompatActivity {
                     if (response.code() == 200) {
                         try {
                             JSONObject jsonObject = new JSONObject(response.body().string());
-                            JSONArray jsonArray = jsonObject.getJSONArray("response");
+                            jsonObject = jsonObject.getJSONObject("response");
                             Gson gson = new Gson();
-                            Result result = gson.fromJson(String.valueOf(jsonArray.get(0)), Result.class);
+                            Result result = gson.fromJson(String.valueOf(jsonObject), Result.class);
                             android.support.v7.app.AlertDialog.Builder builder =
                                     new android.support.v7.app.AlertDialog.Builder(ExamActivity.this, R.style.AppCompatAlertDialogStyle);
                             builder.setTitle(getString(R.string.exam_backpressed_title));

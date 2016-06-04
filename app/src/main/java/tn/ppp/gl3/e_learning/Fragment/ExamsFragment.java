@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import tn.ppp.gl3.e_learning.Adapter.CategoryRecyclerViewAdapter;
+import tn.ppp.gl3.e_learning.Adapter.SimpleRecyclerViewAdapter;
 import tn.ppp.gl3.e_learning.Model.Exam;
 import tn.ppp.gl3.e_learning.R;
 import tn.ppp.gl3.e_learning.Service.DialogFactory;
@@ -44,7 +45,7 @@ public class ExamsFragment extends Fragment {
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_category, container, false);
+        rootView = inflater.inflate(R.layout.fragment_simple_list, container, false);
         retrofitServices = Utils.getRetrofitServices();
         inisiliazeView();
         getExams();
@@ -66,7 +67,7 @@ public class ExamsFragment extends Fragment {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             exams[i] = gson.fromJson(String.valueOf(jsonArray.get(i)), Exam.class);
                         }
-                        CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(getContext(), exams);
+                        SimpleRecyclerViewAdapter categoryRecyclerViewAdapter = new SimpleRecyclerViewAdapter(getContext(), exams);
                         listExams.setAdapter(categoryRecyclerViewAdapter);
                     } catch (JSONException | IOException | NullPointerException e) {
                         e.printStackTrace();
@@ -92,6 +93,7 @@ public class ExamsFragment extends Fragment {
         listExams.setHasFixedSize(true);
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(getString(R.string.loading));
+        ((Toolbar) rootView.findViewById(R.id.toolbar)).setTitle("Exams");
     }
 
     @Override
