@@ -20,6 +20,7 @@ import java.util.Calendar;
 import tn.ppp.gl3.e_learning.Adapter.TrainginViewPagerAdapter;
 import tn.ppp.gl3.e_learning.Model.Exam;
 import tn.ppp.gl3.e_learning.R;
+import tn.ppp.gl3.e_learning.Service.DialogFactory;
 import tn.ppp.gl3.e_learning.Widget.CircularCountDown;
 
 /**
@@ -38,6 +39,7 @@ public class TrainingFragment extends Fragment {
     private Calendar calinit;
     private CircularCountDown img;
     private Exam exam;
+    private FloatingActionButton submitButton;
 
     public static TrainingFragment newInstance(Exam exam) {
 
@@ -71,6 +73,65 @@ public class TrainingFragment extends Fragment {
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
         chronometerLayout = (LinearLayout) rootView.findViewById(R.id.chronometer_layout);
         showNumberPicker();
+        submitButton = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final android.support.v7.app.AlertDialog.Builder builder =
+                        new android.support.v7.app.AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+                builder.setTitle("Hey!");
+                builder.setMessage("Have u finished ur exam?");
+                builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                int[] response = new int[exam.getItems().length];
+                                boolean hasResponse = true;
+                                int total = 0;
+                                for (int i = 0; i < exam.getItems().length; i++) {
+                                    QuestionFragment questionFragment = (QuestionFragment) getChildFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + i);
+                                    int res = questionFragment.getResult();
+                                    if (res == -1) {
+                                        hasResponse = false;
+                                        DialogFactory.showAlertDialogEmptyResponse(getContext(), i+1);
+                                        break;
+                                    } else {
+                                        response[i] = res;
+                                    }
+                                    total += res;
+                                }
+                                if (hasResponse) {
+                                    float result = (float) total / exam.getItems().length;
+                                    String label;
+                                    if (result <= 0.5) {
+                                        label = "fail";
+                                    } else {
+                                        label = "succeed";
+                                    }
+                                    android.support.v7.app.AlertDialog.Builder builder =
+                                            new android.support.v7.app.AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+                                    builder.setTitle(getString(R.string.exam_backpressed_title));
+                                    builder.setMessage(label + " with a score : " + result);
+                                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    builder.show();
+                                }
+                            }
+                        }
+                );
+                builder.setNegativeButton("pas encore", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
     }
 
     private void showNumberPicker() {

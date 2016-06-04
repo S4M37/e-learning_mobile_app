@@ -82,6 +82,23 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/result_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_primary_bg"
+                android:text="results"
+                android:textColor="@drawable/btn_primary_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
                 android:id="@+id/signin_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

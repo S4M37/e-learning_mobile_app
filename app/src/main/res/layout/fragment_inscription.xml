@@ -12,7 +12,7 @@
         android:layout_height="?android:actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="3dp"
-        app:title="@string/app_name"
+        app:title="Inscription"
         app:titleTextColor="@color/white"></android.support.v7.widget.Toolbar>
 
     <android.support.v4.widget.NestedScrollView

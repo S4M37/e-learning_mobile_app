@@ -11,7 +11,9 @@ import android.view.View;
 
 import java.util.Calendar;
 
+import tn.ppp.gl3.e_learning.Activity.ExamActivity;
 import tn.ppp.gl3.e_learning.Activity.MainActivity;
+import tn.ppp.gl3.e_learning.Model.Exam;
 
 /**
  * Created by S4M37 on 31/05/2016.
@@ -187,11 +189,11 @@ public class CircularCountDown extends View {
         } else {
             canvas.drawText("STOP", centerWidth, centerHeight + textOffset, textPaint);
             if (!stopped) {
-                final MainActivity mainActivity = ((MainActivity) context);
-                mainActivity.runOnUiThread(new Runnable() {
+                final ExamActivity examActivity = ((ExamActivity) context);
+                examActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mainActivity.stopTest(CircularCountDown.this.isExam);
+                        examActivity.stopTest(CircularCountDown.this.isExam);
                     }
                 });
                 stopped = true;

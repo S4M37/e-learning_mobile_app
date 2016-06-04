@@ -31,6 +31,13 @@ public interface RetrofitServices {
     @GET("mobile/exams")
     Call<ResponseBody> getExams();
 
+
+    @FormUrlEncoded
+    @POST("mobile/exams/{id_Exam}/submit")
+    Call<ResponseBody> storeResult(@Path("id_Exam") int id_exam, @Field("id_User") int idUser, @Field("inputs[]") int[] response);
+
+    @GET("user/{id_User}/results")
+    Call<ResponseBody> getResultsForUser(@Path("id_User") int id_user);
 }
 
 

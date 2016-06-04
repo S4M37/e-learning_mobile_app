@@ -1,5 +1,6 @@
 package tn.ppp.gl3.e_learning.Fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -7,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +16,11 @@ import android.widget.LinearLayout;
 
 import java.util.Calendar;
 
+import tn.ppp.gl3.e_learning.Activity.ExamActivity;
 import tn.ppp.gl3.e_learning.Adapter.TrainginViewPagerAdapter;
 import tn.ppp.gl3.e_learning.Model.Exam;
 import tn.ppp.gl3.e_learning.R;
+import tn.ppp.gl3.e_learning.Service.DialogFactory;
 import tn.ppp.gl3.e_learning.Widget.CircularCountDown;
 
 /**
@@ -35,6 +39,7 @@ public class ExamFragment extends Fragment {
     private Calendar calinit;
     private CircularCountDown img;
     private Exam exam;
+    private FloatingActionButton submitButton;
 
     public static ExamFragment newInstance(Exam exam) {
 
@@ -63,6 +68,7 @@ public class ExamFragment extends Fragment {
     }
 
     private void inisializeView() {
+
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         collapsingToolbar = (CollapsingToolbarLayout) rootView.findViewById(R.id.toolbar_layout);
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
@@ -73,6 +79,47 @@ public class ExamFragment extends Fragment {
         img = new CircularCountDown(getActivity(), true, 250, calinit, calfin, true);
         chronometerLayout.addView(img);
         img.setId(R.id.img);
+        submitButton = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final android.support.v7.app.AlertDialog.Builder builder =
+                        new android.support.v7.app.AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
+                builder.setTitle("Hey!");
+                builder.setMessage("Have u finished ur exam?");
+                builder.setPositiveButton("oui", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+
+                                int[] response = new int[exam.getItems().length];
+                                boolean hasResponse = true;
+                                for (int i = 0; i < exam.getItems().length; i++) {
+                                    QuestionFragment questionFragment = (QuestionFragment) getChildFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewpager + ":" + i);
+                                    int res = questionFragment.getResult();
+                                    Log.d("res", res + "");
+                                    if (res == -1) {
+                                        hasResponse = false;
+                                        DialogFactory.showAlertDialogEmptyResponse(getContext(), i + 1);
+                                        break;
+                                    } else {
+                                        response[i] = questionFragment.getResult();
+                                    }
+                                }
+                                ((ExamActivity) getActivity()).calulateScore(response, hasResponse);
+                            }
+                        }
+                );
+                builder.setNegativeButton("pas encore", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
+
     }
 
 }

@@ -26,6 +26,7 @@ public class MainFragment extends Fragment {
     private Button signinButton;
     private Button aboutUsButtton;
     private User user;
+    private Button resultButtton;
 
     @Nullable
     @Override
@@ -42,6 +43,12 @@ public class MainFragment extends Fragment {
         examButton = (Button) rootView.findViewById(R.id.exam_button);
         signinButton = (Button) rootView.findViewById(R.id.signin_button);
         aboutUsButtton = (Button) rootView.findViewById(R.id.aboutus_button);
+        resultButtton = (Button) rootView.findViewById(R.id.result_button);
+        if (user == null) {
+            resultButtton.setEnabled(false);
+        } else {
+            resultButtton.setEnabled(true);
+        }
         courcesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,16 +71,16 @@ public class MainFragment extends Fragment {
                 }
             }
         });
-        signinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).showFragment(new LoginFragment());
-            }
-        });
         aboutUsButtton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        resultButtton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity) getActivity()).showFragment(new ResultFragment());
             }
         });
 
@@ -85,6 +92,7 @@ public class MainFragment extends Fragment {
                     signinButton.setText(R.string.login);
                     CompteManager.logout(getContext());
                     user = null;
+                    resultButtton.setEnabled(false);
                     signinButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

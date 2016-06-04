@@ -53,7 +53,7 @@ public class QuestionFragment extends Fragment {
         responseLayout = (LinearLayout) rootView.findViewById(R.id.response_layout);
         choices = new CheckBox[item.getChoices().length];
         for (int i = 0; i < item.getChoices().length; i++) {
-            Choice choice = item.getChoices()[i];
+            final Choice choice = item.getChoices()[i];
             CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(choice.getLabel());
             checkBox.setId(choice.getId_choice());
@@ -79,6 +79,30 @@ public class QuestionFragment extends Fragment {
             });
         } else {
             rootView.findViewById(R.id.card_view_view_response).setVisibility(View.GONE);
+        }
+    }
+
+    public int getResult() {
+        boolean hasResponse = false;
+        int response = 1;
+        for (int i = 0; i < item.getChoices().length; i++) {
+            final Choice choice = item.getChoices()[i];
+            CheckBox checkBox = (CheckBox) rootView.findViewById(choice.getId_choice());
+            if (checkBox.isChecked()) {
+                hasResponse = true;
+                if (choice.getValid() == 0) {
+                    response = 0;
+                }
+            } else {
+                if (choice.getValid() == 1) {
+                    response = 0;
+                }
+            }
+        }
+        if (hasResponse) {
+            return response;
+        } else {
+            return -1;
         }
     }
 

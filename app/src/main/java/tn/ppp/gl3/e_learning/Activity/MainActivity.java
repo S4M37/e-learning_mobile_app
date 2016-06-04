@@ -34,27 +34,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void stopTest(final boolean isExam) {
-        final android.support.v7.app.AlertDialog.Builder builder =
-                new android.support.v7.app.AlertDialog.Builder(this, R.style.AppCompatAlertDialogStyle);
-        builder.setTitle("");
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        if (isExam) {
-                            onBackPressed();
-                        } else {
 
-                        }
-                    }
-                }
-        );
-        if (isExam) {
-            builder.setMessage(getString(R.string.exam_time_out));
-        } else {
-            builder.setMessage(getString(R.string.training_time_out));
-        }
-        builder.show();
-    }
 }
