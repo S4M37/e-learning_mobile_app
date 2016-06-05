@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -76,12 +72,12 @@ public class InscriptionFragment extends Fragment {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             dialog.dismiss();
-                            try {
-                                JSONObject jsonObject = new JSONObject(response.body().string());
+                            Log.d("code", response.code() + "");
+                            if (response.code() == 405) {
+                                DialogFactory.showAlertDialog(getContext(), getString(R.string.user_exists), "Oups");
+                            } else {
                                 DialogFactory.showAlertDialog(getContext(), getString(R.string.email_confirmation), "Succé");
                                 ((MainActivity) getActivity()).showFragment(new MainFragment());
-                            } catch (JSONException | IOException | NullPointerException e) {
-                                e.printStackTrace();
                             }
                         }
 

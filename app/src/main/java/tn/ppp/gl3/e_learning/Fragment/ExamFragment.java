@@ -101,6 +101,7 @@ public class ExamFragment extends Fragment {
                                     if (res == -1) {
                                         hasResponse = false;
                                         DialogFactory.showAlertDialogEmptyResponse(getContext(), i + 1);
+                                        viewPager.setCurrentItem(i);
                                         break;
                                     } else {
                                         response[i] = questionFragment.getResult();

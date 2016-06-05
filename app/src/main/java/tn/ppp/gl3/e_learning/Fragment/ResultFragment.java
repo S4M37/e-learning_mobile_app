@@ -54,7 +54,7 @@ public class ResultFragment extends Fragment {
 
     private void getResults() {
         progressDialog.show();
-        Call<ResponseBody> call = retrofitServices.getResultsForUser(CompteManager.getCurrentUser(getContext()).getId_user());
+        Call<ResponseBody> call = retrofitServices.getResultsForUser(Utils.token,CompteManager.getCurrentUser(getContext()).getId_user());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

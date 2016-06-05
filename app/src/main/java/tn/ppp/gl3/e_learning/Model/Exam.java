@@ -10,11 +10,20 @@ public class Exam implements Serializable {
     private String label;
     private int duration;
     private Item[] items;
+    private Category[] categories;
 
     public Exam(Item[] items) {
         this.items = items;
         label = "training";
         duration = 0;
+    }
+
+    public Category[] getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Category[] categories) {
+        this.categories = categories;
     }
 
     public int getId_exam() {

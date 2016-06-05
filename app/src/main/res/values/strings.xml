@@ -37,4 +37,5 @@
     <string name="exam_backpressed_message">Are u sure u wanna cancel ur exam ?</string>
     <string name="exam_request_title">Hey!</string>
     <string name="exam_request_message">u\'ll start this exam, its duration is </string>
+    <string name="user_exists">there is a user with this email adresse, see ur Emails and confirme ur request ;)</string>
 </resources>

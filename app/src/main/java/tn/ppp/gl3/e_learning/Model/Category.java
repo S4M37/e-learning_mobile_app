@@ -1,9 +1,11 @@
 package tn.ppp.gl3.e_learning.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by S4M37 on 02/06/2016.
  */
-public class Category {
+public class Category implements Serializable {
     private int id_category;
     private String label;
 

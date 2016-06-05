@@ -93,7 +93,8 @@ public class TrainingFragment extends Fragment {
                                     int res = questionFragment.getResult();
                                     if (res == -1) {
                                         hasResponse = false;
-                                        DialogFactory.showAlertDialogEmptyResponse(getContext(), i+1);
+                                        DialogFactory.showAlertDialogEmptyResponse(getContext(), i + 1);
+                                        viewPager.setCurrentItem(i);
                                         break;
                                     } else {
                                         response[i] = res;
@@ -111,7 +112,7 @@ public class TrainingFragment extends Fragment {
                                     android.support.v7.app.AlertDialog.Builder builder =
                                             new android.support.v7.app.AlertDialog.Builder(getContext(), R.style.AppCompatAlertDialogStyle);
                                     builder.setTitle(getString(R.string.exam_backpressed_title));
-                                    builder.setMessage(label + " with a score : " + result);
+                                    builder.setMessage(label + " with a score : " + result * 100 + "%");
                                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {

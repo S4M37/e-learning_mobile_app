@@ -32,7 +32,7 @@ public class ResultRecyclerViewAdapter extends RecyclerView.Adapter<ResultRecycl
     @Override
     public void onBindViewHolder(ResultRecyclerViewAdapter.ViewHolder holder, int position) {
         Result result = results[position];
-        holder.resultScore.setText(result.getScore() + "");
+        holder.resultScore.setText(result.getScore() * 100 + "%");
         holder.resultObservation.setText(result.getObservation());
         holder.resultExamName.setText(result.getExam().getLabel());
         holder.resultExamDate.setText(result.getTest_date());

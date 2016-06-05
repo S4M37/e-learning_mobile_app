@@ -156,7 +156,7 @@ public class ExamActivity extends AppCompatActivity {
 
         if (hasResponse) {
             progressDialog.show();
-            Call<ResponseBody> call = Utils.getRetrofitServices().storeResult(exam.getId_exam(), CompteManager.getCurrentUser(ExamActivity.this).getId_user(), response);
+            Call<ResponseBody> call = Utils.getRetrofitServices().storeResult(Utils.token, exam.getId_exam(), CompteManager.getCurrentUser(ExamActivity.this).getId_user(), response);
             call.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -169,7 +169,7 @@ public class ExamActivity extends AppCompatActivity {
                             android.support.v7.app.AlertDialog.Builder builder =
                                     new android.support.v7.app.AlertDialog.Builder(ExamActivity.this, R.style.AppCompatAlertDialogStyle);
                             builder.setTitle(getString(R.string.exam_backpressed_title));
-                            builder.setMessage(result.getLabel() + " with a score : " + result.getScore());
+                            builder.setMessage(result.getLabel() + " with a score : " + result.getScore() * 100 + "%");
                             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

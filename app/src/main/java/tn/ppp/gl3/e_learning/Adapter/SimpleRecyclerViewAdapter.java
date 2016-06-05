@@ -116,6 +116,13 @@ public class SimpleRecyclerViewAdapter extends RecyclerView.Adapter<SimpleRecycl
         } else if (exams != null) {
             final Exam exam = exams[position];
             holder.label.setText(exam.getLabel());
+            String hint = "";
+            int i;
+            for (i = 0; i < exam.getCategories().length - 1; i++) {
+                hint += exam.getCategories()[i].getLabel() + " - ";
+            }
+            hint += exam.getCategories()[i].getLabel();
+            holder.hint.setText(hint);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -141,11 +148,12 @@ public class SimpleRecyclerViewAdapter extends RecyclerView.Adapter<SimpleRecycl
             });
         } else {
             final Course course = courses[position];
-            Log.d("course", course.getLabel());
             holder.label.setText(course.getLabel());
+            holder.hint.setText(course.getCategory().getLabel());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    progressDialog.show();
                     Call<ResponseBody> call = Utils.getRetrofitServices().downloadCourse(course.getId_cource());
                     call.enqueue(new Callback<ResponseBody>() {
                         @Override
@@ -161,11 +169,12 @@ public class SimpleRecyclerViewAdapter extends RecyclerView.Adapter<SimpleRecycl
                                     e.printStackTrace();
                                 }
                             }
+                            progressDialog.dismiss();
                         }
 
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                            progressDialog.dismiss();
                         }
                     });
                 }
@@ -187,11 +196,13 @@ public class SimpleRecyclerViewAdapter extends RecyclerView.Adapter<SimpleRecycl
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CircleImageView img;
         public TextView label;
+        public TextView hint;
 
         public ViewHolder(View itemView) {
             super(itemView);
             img = (CircleImageView) itemView.findViewById(R.id.img_category);
             label = (TextView) itemView.findViewById(R.id.category_label);
+            hint = (TextView) itemView.findViewById(R.id.hint_label);
         }
     }
 }

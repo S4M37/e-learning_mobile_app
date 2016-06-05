@@ -8,6 +8,23 @@ public class Course {
     private String img_path;
     private String pdf_path;
     private String label;
+    private Category category;
+
+    public int getId_course() {
+        return id_course;
+    }
+
+    public void setId_course(int id_course) {
+        this.id_course = id_course;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public int getId_cource() {
         return id_course;

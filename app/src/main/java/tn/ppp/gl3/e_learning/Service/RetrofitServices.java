@@ -5,6 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Streaming;
@@ -30,15 +31,15 @@ public interface RetrofitServices {
     Call<ResponseBody> getTrainginByCategry(@Path("id") int id_category);
 
     @GET("mobile/exams")
-    Call<ResponseBody> getExams();
+    Call<ResponseBody> getExams(@Header("Authorization") String token);
 
 
     @FormUrlEncoded
     @POST("mobile/exams/{id_Exam}/submit")
-    Call<ResponseBody> storeResult(@Path("id_Exam") int id_exam, @Field("id_User") int idUser, @Field("inputs[]") int[] response);
+    Call<ResponseBody> storeResult(@Header("Authorization") String token,@Path("id_Exam") int id_exam, @Field("id_User") int idUser, @Field("inputs[]") int[] response);
 
     @GET("user/{id_User}/results")
-    Call<ResponseBody> getResultsForUser(@Path("id_User") int id_user);
+    Call<ResponseBody> getResultsForUser(@Header("Authorization") String token,@Path("id_User") int id_user);
 
     @GET("courses/{id_Course}/download")
     @Streaming

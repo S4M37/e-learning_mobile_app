@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class CoursesFragment extends Fragment {
                         Course[] courses = new Course[jsonArray.length()];
                         for (int i = 0; i < jsonArray.length(); i++) {
                             courses[i] = gson.fromJson(String.valueOf(jsonArray.get(i)), Course.class);
+                            Log.d("response",String.valueOf(jsonArray.get(i)));
                         }
                         SimpleRecyclerViewAdapter categoryRecyclerViewAdapter = new SimpleRecyclerViewAdapter(getContext(), courses);
                         listCategries.setAdapter(categoryRecyclerViewAdapter);
