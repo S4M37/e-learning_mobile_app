@@ -1,4 +1,4 @@
-package tn.ppp.gl3.e_learning.Utils;
+package tn.ppp.gl3.e_learning.utils;
 
 import android.content.Context;
 import android.database.Cursor;

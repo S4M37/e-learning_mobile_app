@@ -30,12 +30,13 @@
     <string name="logout">sign out</string>
     <string name="login">sign in</string>
     <string name="exam_time_out">exam is ended!</string>
-    <string name="training_time_out">nice try, but time is out, wanna review responses ?</string>
-    <string name="label_example">Quo cognito Constantius ultra <morta></morta>lem modum exarsit ac nequo casu idem Gallus de futuris incertus agitare quaedam conducentia saluti suae per itinera conaretur, remoti sunt omnes de industria milites agentes in civitatibus perviis.</string>
+    <string name="training_time_out">nice try, but time is out, want to review responses ?</string>
+    <string name="label_example">Quo cognito Constantius ultra morta lem modum exarsit ac nequo casuidem Gallus de futuris incertus agitare quaedam conducentia saluti suae per itinera conaretur, remoti sunt omnes de industria milites agentes in civitatibus perviis.</string>
     <string name="choice_example">Sed cautela nimia in peiores haeserat.</string>
     <string name="exam_backpressed_title">Hey!</string>
-    <string name="exam_backpressed_message">Are u sure u wanna cancel ur exam ?</string>
+    <string name="exam_backpressed_message">Are u sure u want to cancel ur exam ?</string>
     <string name="exam_request_title">Hey!</string>
     <string name="exam_request_message">u\'ll start this exam, its duration is </string>
     <string name="user_exists">there is a user with this email adresse, see ur Emails and confirme ur request ;)</string>
+    <string name="no_training_availble">No training available for this category</string>
 </resources>

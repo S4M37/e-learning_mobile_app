@@ -1,4 +1,4 @@
-package tn.ppp.gl3.e_learning.Utils;
+package tn.ppp.gl3.e_learning.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import tn.ppp.gl3.e_learning.Service.RetrofitServices;
+import tn.ppp.gl3.e_learning.config.Url;
+import tn.ppp.gl3.e_learning.services.RetrofitServices;
 
 /**
  * Created by S4M37 on 17/04/2016.
